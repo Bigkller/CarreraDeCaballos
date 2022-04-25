@@ -1,0 +1,75 @@
+//Desarrollar un programa utilizando el lenguaje de programación C++, Java o Python que
+//implemente un juego que simule una carrera de caballos. Este programa debe tener un set de
+//funciones en una biblioteca que permitan hacer uso de alguna de las siguientes procedimientos:
+//Hipodromo.Caballo.Carrera.Ganador
+
+//Integrantes: Pablo Gonzalez Keller ; Javiera Muñoz Venegas.
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+public class CarreraDeCaballo {
+	public static void main(String[] args) {
+		int repeticiones= 10;
+
+		ArrayList<String> arrListNombre = new ArrayList<>(Arrays.asList("Manchi", "Cliford", "Flippy"));
+
+		System.out.println("¡ Los caballos esta listo para salir del punto de partida del hipodromo !");
+		System.out.println("");
+		System.out.println(" _______________________");
+		System.out.println("|   TABLERO CARRERA  	|");
+		System.out.println("| --------------------- |");
+		System.out.println("|  Numeros de caballos 	|");
+		System.out.println("| --------------------- |");
+		System.out.println("| Manchi   | - N°1 -    |");
+		System.out.println("| Cliford  | - N°2 -    |");
+		System.out.println("| Flippy   | - N°3 -    |"); 
+		System.out.println(" _______________________ ");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Iniciando carrera...");
+		System.out.println("");
+		System.out.println("");
+
+		double[] avance = new double[arrListNombre.size()];
+
+		comenzarCarrera(repeticiones, arrListNombre.size(), avance);
+		System.out.println(getWinner(arrListNombre, avance));
+	}
+
+	public static void comenzarCarrera(int repeticiones, int NCaballos, double[] avance) {
+		double progreso = 0;
+		for (int i = 0; i < repeticiones; i++) {
+			System.out.println("Actualizacion N°" + (i + 1));
+		
+			for (int j = 0; j < NCaballos; j++) {
+				Random random = new Random();
+				progreso = random.nextInt(repeticiones + 0) + 0;
+
+				avance[j] += progreso;
+				System.out.println("Caballo " + (j + 1) + " ha avanzado " + (int) avance[j] + " metros de distancia.");
+
+			}
+			System.out.println("");
+		}
+
+	}
+
+	public static String getWinner(ArrayList<String> a, double[] avance) {
+		double max = avance[0];
+		int ganador = 0;
+
+		for (int i = 0; i < avance.length - 1; i++) {
+
+			if (max < avance[i + 1]) {
+				max = avance[i + 1];
+				ganador = i + 1;
+			}
+
+		}
+
+		return "!" + a.get(ganador) + "! FUE EL GANADOR DE LA CARRERA \n con " + avance[ganador] + " metros de distancia";
+	}
+
+}
